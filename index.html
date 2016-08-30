@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="./bower_components/ngstorage/ngStorage.min.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./bower_components/materialize/dist/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./bower_components/materialize/dist/css/materialize.min.css" />
+    <script type="text/javascript" src="./dist/app.build.js"></script>
+    <base href="/" />
+</head>
+<body ng-app="redeApp">
+    <nav ng-controller="MenuController">
+        <div class="nav-wrapper red darken-3" style="padding: 0 16px">
+            <a href="#!" class="brand-logo">Red e App</a>
+            <a href="#" data-activates="mobile-demo" class="nav-menu-button right">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="side-nav" id="mobile-demo">
+                <li ng-if="isAuthorized"><a class="subheader">My networks</a></li>
+
+                <li ng-repeat="subscription in subscriptions" ng-if="isAuthorized">
+                    <a href="networks/{{ subscription.id }}" class="truncate">{{ subscription.id }}</a>
+                </li>
+
+                <li ng-if="isAuthorized"><div class="divider"></div></li>
+
+                <li ng-if="isAuthorized"><a class="subheader">My contacts</a></li>
+
+                <li ng-if="isAuthorized"><div class="divider"></div></li>
+
+                <li ng-if="isAuthorized"><a href="/profile">My profile</a></li>
+                <li ng-if="isAuthorized"><a href="/logout" ng-click="logOut()">Log out</a></li>
+
+                <li ng-if="!isAuthorized"><a href="/login">Log in</a></li>
+                <li ng-if="!isAuthorized"><a href="/register">Register</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <ng-view></ng-view>
+</body>
+</html>
